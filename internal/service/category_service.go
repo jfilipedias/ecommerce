@@ -1,21 +1,21 @@
 package service
 
 import (
-	"github.com/jfilipedias/ecommerce-fullcycle/api/internal/database"
 	"github.com/jfilipedias/ecommerce-fullcycle/api/internal/entity"
+	"github.com/jfilipedias/ecommerce-fullcycle/api/internal/repository"
 )
 
 type CategoryService struct {
-	CategoryDB database.CategoryDB
+	CategoryRepository repository.CategoryRepository
 }
 
-func NewCategoryService(categoryDB database.CategoryDB) *CategoryService {
-	return &CategoryService{CategoryDB: categoryDB}
+func NewCategoryService(categoryRepository repository.CategoryRepository) *CategoryService {
+	return &CategoryService{CategoryRepository: categoryRepository}
 }
 
 func (cs *CategoryService) Create(name string) (*entity.Category, error) {
 	category := entity.NewCategory(name)
-	_, err := cs.CategoryDB.Create(category)
+	_, err := cs.CategoryRepository.Create(category)
 	if err != nil {
 		return nil, err
 	}
@@ -23,7 +23,7 @@ func (cs *CategoryService) Create(name string) (*entity.Category, error) {
 }
 
 func (cs *CategoryService) GetAll() ([]*entity.Category, error) {
-	categories, err := cs.CategoryDB.GetAll()
+	categories, err := cs.CategoryRepository.GetAll()
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func (cs *CategoryService) GetAll() ([]*entity.Category, error) {
 }
 
 func (cs *CategoryService) GetByID(id string) (*entity.Category, error) {
-	category, err := cs.CategoryDB.GetByID(id)
+	category, err := cs.CategoryRepository.GetByID(id)
 	if err != nil {
 		return nil, err
 	}
