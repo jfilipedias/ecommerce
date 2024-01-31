@@ -21,7 +21,10 @@ func main() {
 		panic("Error loading .env file")
 	}
 
-	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	connStr := fmt.Sprintf("user=%q password=%q dbname=%q port=%q sslmode=disable",
+		os.Getenv("POSTGRESQL_USER"), os.Getenv("POSTGRESQL_PASSWORD"), os.Getenv("POSTGRES_DB"), os.Getenv("POSTGRES_PORT"))
+
+	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -49,7 +52,7 @@ func main() {
 	r.Get("/products/{id}", productHandler.GetByID)
 	r.Get("/products/categories/{categoryID}", productHandler.GetByCategoryID)
 
-	p := os.Getenv("PORT")
+	p := os.Getenv("API_PORT")
 	fmt.Printf("Server is running on port %q", p)
 	http.ListenAndServe(p, r)
 }
