@@ -1,0 +1,50 @@
+@hostname=http://localhost
+@port=8080
+@host={{hostname}}:{{port}}
+
+// Create category
+POST {{host}}/categories
+Content-Type: application/json
+
+{
+  "name": "Calças Femininas"
+}
+
+###
+
+// Get all categories
+GET {{host}}/categories
+
+###
+
+// Get category
+GET {{host}}/categories/698d3c66-d9cf-4d1b-8e9e-b9ad631db685
+
+###
+
+// Create product
+POST {{host}}/products
+Content-Type: application/json
+
+{
+  "name": "Pantalona",
+  "description": "Pantalona em eco linho",
+  "price": 117.00,
+  "category_id":"698d3c66-d9cf-4d1b-8e9e-b9ad631db685",
+  "image_url": "https://acdn.mitiendanube.com/stores/003/102/533/products/5faedf72-365a-4f25-a317-d480fb97063e1-6bd05b45f95c7e2d8316915426450948-1024-1024.webp"
+}
+
+###
+
+// Get all products
+GET {{host}}/products
+
+###
+
+// Get product
+GET {{host}}/products/57fd9f3c-4ca9-4d42-8f73-16c1811def01
+
+###
+
+// Get products by cartegory
+GET {{host}}/products/categories/698d3c66-d9cf-4d1b-8e9e-b9ad631db685

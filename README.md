@@ -20,7 +20,11 @@ Install migration tool [migrate](https://github.com/go-migration/migrate):
 go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 ```
 
-Run migrations e.g.:
+On `api` directory run migrations e.g.:
+
+```sh
+cd api
+```
 
 ```sh
 migrate -path ./db/migrations -database "postgresql://local_user:local_password@localhost:5432/local_db?sslmode=disable" up
