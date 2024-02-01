@@ -21,8 +21,8 @@ func main() {
 		panic("Error loading .env file")
 	}
 
-	connStr := fmt.Sprintf("user=%q password=%q dbname=%q port=%q sslmode=disable",
-		os.Getenv("POSTGRESQL_USER"), os.Getenv("POSTGRESQL_PASSWORD"), os.Getenv("POSTGRES_DB"), os.Getenv("POSTGRES_PORT"))
+	connStr := fmt.Sprintf("user=%s password=%s dbname=%s port=%s sslmode=disable",
+		os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("POSTGRES_DB"), os.Getenv("POSTGRES_PORT"))
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
