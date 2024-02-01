@@ -15,7 +15,7 @@ func NewCategoryRepository(db *sql.DB) *CategoryRepository {
 }
 
 func (cr *CategoryRepository) Create(category *entity.Category) (string, error) {
-	_, err := cr.db.Exec("INSERT INTO categories (id, name) VALUES (?, ?)", category.ID, category.Name)
+	_, err := cr.db.Exec("INSERT INTO categories (id, name) VALUES ($1, $2)", category.ID, category.Name)
 	if err != nil {
 		return "", err
 	}
@@ -45,7 +45,7 @@ func (cr *CategoryRepository) GetAll() ([]*entity.Category, error) {
 
 func (cr *CategoryRepository) GetByID(id string) (*entity.Category, error) {
 	var category entity.Category
-	err := cr.db.QueryRow("SELECT id, name FROM categories WHERE id = ?", id).Scan(&category.ID, &category.Name)
+	err := cr.db.QueryRow("SELECT id, name FROM categories WHERE id = $1", id).Scan(&category.ID, &category.Name)
 	if err != nil {
 		return nil, err
 	}

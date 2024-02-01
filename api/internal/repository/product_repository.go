@@ -15,7 +15,7 @@ func NewProductRepository(db *sql.DB) *ProductRepository {
 }
 
 func (pr *ProductRepository) Create(product *entity.Product) (string, error) {
-	_, err := pr.db.Exec("INSERT INTO products (id, name, description, price, category_id, image_url) VALUES(?, ?, ?, ?, ?, ?)",
+	_, err := pr.db.Exec("INSERT INTO products (id, name, description, price, category_id, image_url) VALUES($1, $2, $3, $4, $5, $6)",
 		product.ID, product.Name, product.Description, product.Price, product.CategoryID, product.ImageURL)
 	if err != nil {
 		return "", err
@@ -24,7 +24,7 @@ func (pr *ProductRepository) Create(product *entity.Product) (string, error) {
 }
 
 func (pr *ProductRepository) GetAll() ([]*entity.Product, error) {
-	rows, err := pr.db.Query("SELECT id, name, description, price, category_id, image_url FROM products")
+	rows, err := pr.db.Query("SELECT * FROM products")
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ func (pr *ProductRepository) GetAll() ([]*entity.Product, error) {
 
 func (pr *ProductRepository) GetByID(id string) (*entity.Product, error) {
 	var product entity.Product
-	err := pr.db.QueryRow("SELECT id, name, description, price, category_id, image_url FROM products WHERE id = ?", id).
+	err := pr.db.QueryRow("SELECT * FROM products WHERE id = $1", id).
 		Scan(&product.ID, &product.Name, &product.Description, &product.Price, &product.CategoryID, &product.ImageURL)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func (pr *ProductRepository) GetByID(id string) (*entity.Product, error) {
 }
 
 func (pr *ProductRepository) GetByCategoryID(categoryID string) ([]*entity.Product, error) {
-	rows, err := pr.db.Query("SELECT id, name, description, price, category_id, image_url FROM products WHERE category_id = ?", categoryID)
+	rows, err := pr.db.Query("SELECT * FROM products WHERE category_id = $1", categoryID)
 	if err != nil {
 		return nil, err
 	}
