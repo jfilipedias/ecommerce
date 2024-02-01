@@ -13,13 +13,13 @@ func NewProductService(productRepository repository.ProductRepository) *ProductS
 	return &ProductService{ProductRepository: productRepository}
 }
 
-func (ps *ProductService) Create(name, description string, price float64, categoryID, imageURL string) (string, error) {
+func (ps *ProductService) Create(name, description string, price float64, categoryID, imageURL string) (*entity.Product, error) {
 	product := entity.NewProduct(name, description, price, categoryID, imageURL)
-	productID, err := ps.ProductRepository.Create(product)
+	_, err := ps.ProductRepository.Create(product)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
-	return productID, err
+	return product, err
 }
 
 func (ps *ProductService) GetAll() ([]*entity.Product, error) {
