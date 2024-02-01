@@ -53,6 +53,6 @@ func main() {
 	r.Get("/products/categories/{categoryID}", productHandler.GetByCategoryID)
 
 	p := os.Getenv("API_PORT")
-	fmt.Printf("Server is running on port %q", p)
+	fmt.Printf("Server is running on port %q\n", p)
 	http.ListenAndServe(p, r)
 }

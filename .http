@@ -1,0 +1,11 @@
+@hostname=http://localhost
+@port=8080
+@host={{hostname}}:{{port}}
+
+// Create user
+POST {{host}}/categories
+Content-Type: application/json
+
+{
+  "name": "Calças Femininas"
+}
