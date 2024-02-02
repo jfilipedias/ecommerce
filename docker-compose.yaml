@@ -1,11 +1,28 @@
-version: '3.1'
+version: "3.1"
 
 services:
-  db:
+  catalog-db:
     image: postgres:16.1-alpine3.19
-    container_name: postgres
+    container_name: catalog-db
     restart: always
-    env_file: 
-      - ./.env
+    env_file:
+      - .env
+    environment:
+      - POSTRGES_USER=${CATALOG_POSTGRES_USER}
+      - POSTRGES_PASSWORD=${CATALOG_POSTGRES_PASSWORD}
+      - POSTRGES_DB=${CATALOG_POSTGRES_DB}
     ports:
-      - 5432:5432
+      - 8001:5432
+
+  order-db:
+    image: postgres:16.1-alpine3.19
+    container_name: order-db
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTRGES_USER=${ORDER_POSTGRES_USER}
+      - POSTRGES_PASSWORD=${ORDER_POSTGRES_PASSWORD}
+      - POSTRGES_DB=${ORDER_POSTGRES_DB}
+    ports:
+      - 8002:5432

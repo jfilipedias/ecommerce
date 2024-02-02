@@ -1,4 +1,4 @@
-module github.com/jfilipedias/ecommerce-fullcycle/catalog-api
+module github.com/jfilipedias/ecommerce/catalog-api
 
 go 1.21.3
 

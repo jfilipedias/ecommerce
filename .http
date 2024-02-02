@@ -1,9 +1,8 @@
-@hostname=http://localhost
-@port=8080
-@host={{hostname}}:{{port}}
+@catalog_host=localhost:8081
+@order_host=localhost:8082
 
 // Create category
-POST {{host}}/categories
+POST {{catalog_host}}/categories
 Content-Type: application/json
 
 {
@@ -13,17 +12,17 @@ Content-Type: application/json
 ###
 
 // Get all categories
-GET {{host}}/categories
+GET {{catalog_host}}/categories
 
 ###
 
 // Get category
-GET {{host}}/categories/698d3c66-d9cf-4d1b-8e9e-b9ad631db685
+GET {{catalog_host}}/categories/698d3c66-d9cf-4d1b-8e9e-b9ad631db685
 
 ###
 
 // Create product
-POST {{host}}/products
+POST {{catalog_host}}/products
 Content-Type: application/json
 
 {
@@ -37,14 +36,14 @@ Content-Type: application/json
 ###
 
 // Get all products
-GET {{host}}/products
+GET {{catalog_host}}/products
 
 ###
 
 // Get product
-GET {{host}}/products/57fd9f3c-4ca9-4d42-8f73-16c1811def01
+GET {{catalog_host}}/products/57fd9f3c-4ca9-4d42-8f73-16c1811def01
 
 ###
 
 // Get products by cartegory
-GET {{host}}/products/categories/698d3c66-d9cf-4d1b-8e9e-b9ad631db685
+GET {{catalog_host}}/products/categories/698d3c66-d9cf-4d1b-8e9e-b9ad631db685
