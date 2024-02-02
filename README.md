@@ -2,6 +2,14 @@
 
 ## Getting Started
 
+### Catalog API
+
+Enter catalog api dir:
+
+```sh
+cd api
+```
+
 Clone the existing `.env.example` into `.env` and setup environment variables:
 
 ```sh
@@ -20,11 +28,7 @@ Install migration tool [migrate](https://github.com/go-migration/migrate):
 go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 ```
 
-On `api` directory run migrations e.g.:
-
-```sh
-cd api
-```
+Run migrations e.g.:
 
 ```sh
 migrate -path ./db/migrations -database "postgresql://local_user:local_password@localhost:5432/local_db?sslmode=disable" up
