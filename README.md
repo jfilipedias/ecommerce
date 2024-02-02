@@ -2,9 +2,9 @@
 
 ## Getting Started
 
-### Catalog API
+### API
 
-Enter catalog api dir:
+Enter api dir:
 
 ```sh
 cd api

@@ -5,8 +5,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/jfilipedias/ecommerce/catalog-api/internal/category"
-	"github.com/jfilipedias/ecommerce/catalog-api/internal/product"
+	"github.com/jfilipedias/ecommerce/api/internal/category"
+	"github.com/jfilipedias/ecommerce/api/internal/product"
 )
 
 func NewRouter(db *sql.DB) *chi.Mux {
