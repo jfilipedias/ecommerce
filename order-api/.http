@@ -1,3 +1,0 @@
-@hostname=http://localhost
-@port=8082
-@host={{hostname}}:{{port}}
