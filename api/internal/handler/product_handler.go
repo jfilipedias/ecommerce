@@ -1,22 +1,24 @@
-package product
+package handler
 
 import (
 	"encoding/json"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/jfilipedias/ecommerce/api/internal/entity"
+	"github.com/jfilipedias/ecommerce/api/internal/service"
 )
 
 type ProductHandler struct {
-	ProductService ProductService
+	ProductService service.ProductService
 }
 
-func NewHandler(productService *ProductService) *ProductHandler {
+func NewProductHandler(productService *service.ProductService) *ProductHandler {
 	return &ProductHandler{ProductService: *productService}
 }
 
 func (ph *ProductHandler) Create(w http.ResponseWriter, r *http.Request) {
-	var product Product
+	var product entity.Product
 	err := json.NewDecoder(r.Body).Decode(&product)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)

@@ -17,7 +17,7 @@ func main() {
 		panic(err.Error())
 	}
 
-	db, err := db.NewDatabase()
+	db, err := db.NewPostgresDatabase()
 	if err != nil {
 		panic(err.Error())
 	}

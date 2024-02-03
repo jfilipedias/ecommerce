@@ -1,22 +1,24 @@
-package category
+package handler
 
 import (
 	"encoding/json"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/jfilipedias/ecommerce/api/internal/entity"
+	"github.com/jfilipedias/ecommerce/api/internal/service"
 )
 
 type CategoryHandler struct {
-	CategoryService *CategoryService
+	CategoryService *service.CategoryService
 }
 
-func NewHandler(categoryService *CategoryService) *CategoryHandler {
+func NewCategoryHandler(categoryService *service.CategoryService) *CategoryHandler {
 	return &CategoryHandler{CategoryService: categoryService}
 }
 
 func (ch *CategoryHandler) Create(w http.ResponseWriter, r *http.Request) {
-	var category Category
+	var category entity.Category
 	err := json.NewDecoder(r.Body).Decode(&category)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)

@@ -5,18 +5,19 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/jfilipedias/ecommerce/api/internal/category"
-	"github.com/jfilipedias/ecommerce/api/internal/product"
+	"github.com/jfilipedias/ecommerce/api/internal/handler"
+	"github.com/jfilipedias/ecommerce/api/internal/repository"
+	"github.com/jfilipedias/ecommerce/api/internal/service"
 )
 
 func NewRouter(db *sql.DB) *chi.Mux {
-	categoryRepository := category.NewRepository(db)
-	categoryService := category.NewService(*categoryRepository)
-	categoryHandler := category.NewHandler(categoryService)
+	categoryRepository := repository.NewCategoryRepository(db)
+	categoryService := service.NewCategoryService(*categoryRepository)
+	categoryHandler := handler.NewCategoryHandler(categoryService)
 
-	productRepository := product.NewRepository(db)
-	productService := product.NewService(*productRepository)
-	productHandler := product.NewHandler(productService)
+	productRepository := repository.NewProductRepository(db)
+	productService := service.NewProductService(*productRepository)
+	productHandler := handler.NewProductHandler(productService)
 
 	r := chi.NewRouter()
 
